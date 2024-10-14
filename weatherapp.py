@@ -49,12 +49,14 @@ def call_api(event):
     sunrise_time = dt.fromtimestamp(sunrise_time_ts, tz=timezone.utc).time()
     sunset_time_ts = response2["sys"]["sunset"] + response2["timezone"]
     sunset_time = dt.fromtimestamp(sunset_time_ts, tz=timezone.utc).time()
+    general_description = response2["weather"][0]["description"]
     #print(f"Sunrise time happens at {sunrise_time}")
 
     # Fill the empty spaces:
     lblCity.config(text=cityName)
     lblTemp1.config(text=f"{temperature_celsius:.2f} \N{DEGREE SIGN}C")
     lblTemp2.config(text=f"({temperature_fahrenheit:.2f} \N{DEGREE SIGN}F)")
+    lblCond.config(text=f"{general_description}")
     lblSunrise.config(text=sunrise_time)
     lblSunset.config(text=sunset_time)
 
@@ -81,7 +83,7 @@ lblTemp2 = tk.Label(master=frm, text="Fahrenheit", width=10, height=2, bg="alice
 lblTemp2.grid(row=1, column=1, padx=0, pady=5, sticky='nw')
 lblTemp2.configure(font = Font_tuple)
 
-lblCond = tk.Label(master=frm, text="Conditions", width=36, height=2, bg="#6d6d6d", anchor='w')
+lblCond = tk.Label(master=frm, text="Conditions", width=36, height=2, bg="aliceblue", anchor='w')
 lblCond.grid(row=2, column=0, padx=0, pady=5, sticky='w', columnspan=2)
 lblCond.configure(font = Font_tuple)
 
